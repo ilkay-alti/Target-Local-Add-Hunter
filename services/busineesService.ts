@@ -21,12 +21,22 @@ export const fetchBusinesses = async (
 
     const response = await fetch(url.toString(), {
       headers: {
-        Authorization: `Bearer + ${process.env.API}`, // API anahtarı
+        Authorization: `Bearer ${process.env.FOURSQUARE_API_KEY}`, // API anahtarı
         Accept: "application/json",
       },
     });
 
+    if (!response.ok) {
+      console.error(`API error! Status: ${response.status}`);
+      return []; // Hata durumunda boş bir dizi döndür
+    }
+
     const data = await response.json();
+
+    if (!data || !data.results) {
+      console.error("API response does not contain 'results' array:", data);
+      return []; // 'results' yoksa boş bir dizi döndür
+    }
 
     // Veriyi işleyip daha düzenli hale getirebiliriz
     const processedResults = data.results.map((business: any) => ({
