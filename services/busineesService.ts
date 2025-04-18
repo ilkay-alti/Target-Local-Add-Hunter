@@ -21,7 +21,7 @@ export const fetchBusinesses = async (
 
     const response = await fetch(url.toString(), {
       headers: {
-        Authorization: `Bearer `, // API anahtarı
+        Authorization: `Bearer + ${process.env.API,}`, // API anahtarı
         Accept: "application/json",
       },
     });
