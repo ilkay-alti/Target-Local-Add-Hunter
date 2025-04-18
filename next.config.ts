@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
   env: {
     FOURSQUARE_API_KEY: process.env.FOURSQUARE_API_KEY,
   },
+   basePath: '/target-local-add-hunter',
 };
 
 export default nextConfig;
