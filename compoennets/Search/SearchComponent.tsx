@@ -1,11 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import MapComponent from "./MapComponent";
 import AnimatedInput from "../Custom/AnimatedInput";
 import { Business, Location } from "@/types/business-finder";
-import { fetchBusinesses } from "@/services/busineesService"; // doğru path'e göre uyarlanmalı
+import { fetchBusinesses } from "@/services/busineesService";
 import { getCoordinatesFromLocation } from "@/services/getCordinate";
 import BusinessCard from "../BusinessCard";
+import dynamic from "next/dynamic";
 
 const SearchComponent = () => {
   const [city, setCity] = useState<string>("Ankara");
@@ -13,6 +13,10 @@ const SearchComponent = () => {
   const [range, setRange] = useState<number>(27);
   const [businesses, setBusinesses] = useState<Business[]>([]);
   const [isSearching, setIsSearching] = useState<boolean>(false);
+
+  const MapComponent = dynamic(() => import("./MapComponent"), {
+    ssr: false,
+  });
 
   const [location, setLocation] = useState<Location>({
     lat: 39.9334,
